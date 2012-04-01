@@ -12,32 +12,37 @@
 
 function B = FactorMarginalization(A, V)
 
-% Check for empty factor or variable list
-if (isempty(A.var) || isempty(V)), B = A; return; end;
+    % Check for empty factor or variable list
+    if (isempty(A.var) || isempty(V)), B = A; return; end;
 
-% Construct the output factor over A.var \ V (the variables in A.var that are not in V)
-% and mapping between variables in A and B
-[B.var, mapB] = setdiff(A.var, V);
+    % Construct the output factor over A.var \ V (the variables in A.var that are not in V)
+    % and mapping between variables in A and B
+    [B.var, mapB] = setdiff(A.var, V);
 
-% Check for empty resultant factor
-if isempty(B.var)
-  error('Error: Resultant factor has empty scope');
-end;
+    % Check for empty resultant factor
+    if isempty(B.var)
+      error('Error: Resultant factor has empty scope');
+    end;
 
-% Initialize B.card and B.val
-B.card = A.card(mapB);
-B.val = zeros(1, prod(B.card));
+    % Initialize B.card and B.val
+    B.card = A.card(mapB);
+    B.val = zeros(1, prod(B.card));
 
-% Compute some helper indices
-% These will be very useful for calculating B.val
-% so make sure you understand what these lines are doing
-assignments = IndexToAssignment(1:length(A.val), A.card);
-indxB = AssignmentToIndex(assignments(:, mapB), B.card);
+    % Compute some helper indices
+    % These will be very useful for calculating B.val
+    % so make sure you understand what these lines are doing
+    assignments = IndexToAssignment(1:length(A.val), A.card);
+    indxB = AssignmentToIndex(assignments(:, mapB), B.card);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% YOUR CODE HERE
-% Correctly populate the factor values of B
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % YOUR CODE HERE
+    % Correctly populate the factor values of B
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Must learn how to vecotorize this 
+    for i = 1 : length(B.val)
+        B.val(i) = sum(A.val([indxB==i]));
+    end    
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
