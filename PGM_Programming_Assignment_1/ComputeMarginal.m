@@ -14,20 +14,20 @@
 
 function M = ComputeMarginal(V, F, E)
 
-% Check for empty factor list
-if (numel(F) == 0)
-      warning('Warning: empty factor list');
-      M = struct('var', [], 'card', [], 'val', []);      
-      return;
-end
+    % Check for empty factor list
+    if (numel(F) == 0)
+          warning('Warning: empty factor list');
+          M = struct('var', [], 'card', [], 'val', []);      
+          return;
+    end
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% YOUR CODE HERE:
-% M should be a factor
-% Remember to renormalize the entries of M!
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % YOUR CODE HERE:
+    % M should be a factor
+    % Remember to renormalize the entries of M!
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-M = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
+    M = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
