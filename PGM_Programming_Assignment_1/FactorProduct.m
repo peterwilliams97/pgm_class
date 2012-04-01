@@ -61,12 +61,15 @@ function C = FactorProduct(A, B)
     % YOUR CODE HERE:
     % Correctly populate the factor values of C
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+    C.val = A.val(indxA) .* B.val(indxB);
 
-    for i = 1:length(C.val)
-        iA = indxA(i);
-        iB = indxB(i);
-        C.val(i) = A.val(iA) * B.val(iB);
-    end
+    % The hard way
+    %for i = 1:length(C.val)
+    %    iA = indxA(i);
+    %    iB = indxB(i);
+    %    C.val(i) = A.val(iA) * B.val(iB);
+    %end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 end
