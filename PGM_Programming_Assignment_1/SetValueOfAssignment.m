@@ -27,6 +27,7 @@ function F = SetValueOfAssignment(F, A, v, VO)
         end;
         indx = AssignmentToIndex(A(map), F.card);
     end;
+   
 
     F.val(indx) = v;
 

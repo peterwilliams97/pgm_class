@@ -40,7 +40,7 @@ function B = FactorMarginalization(A, V)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     % Must learn how to vecotorize this 
-    for i = 1 : length(B.val)
+    for i = 1 : length(B.val),
         B.val(i) = sum(A.val([indxB==i]));
     end    
 

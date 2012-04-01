@@ -21,14 +21,15 @@ for i = 1:size(E, 1),
         warning(['Evidence not set for variable ', int2str(v)]);
         continue;
     end;
-
+        
     for j = 1:length(F),
-		  % Does factor contain variable?
+      
+        % Does factor contain variable?
         indx = find(F(j).var == v);
 
         if (~isempty(indx)),
-        
-		  	   % Check validity of evidence
+            
+            % Check validity of evidence
             if (x > F(j).card(indx) || x < 0 ),
                 error(['Invalid evidence, X_', int2str(v), ' = ', int2str(x)]);
             end;
@@ -39,10 +40,19 @@ for i = 1:size(E, 1),
             % Hint: You might find it helpful to use IndexToAssignment
             %       and SetValueOfAssignment
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-            
+
+
+            for k = 1:length(F(j).val),
+
+                A = IndexToAssignment(k, F(j).card);
+                if A(indx) ~= x,
+                    F(j) = SetValueOfAssignment(F(j), A, 0);
+                end;
+            end;
+
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-				% Check validity of evidence / resulting factor
+            % Check validity of evidence / resulting factor
             if (all(F(j).val == 0)),
                 warning(['Factor ', int2str(j), ' makes variable assignment impossible']);
             end;
