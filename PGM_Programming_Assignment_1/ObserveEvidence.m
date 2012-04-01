@@ -41,9 +41,7 @@ for i = 1:size(E, 1),
             %       and SetValueOfAssignment
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
             for k = 1:length(F(j).val),
-
                 A = IndexToAssignment(k, F(j).card);
                 if A(indx) ~= x,
                     F(j) = SetValueOfAssignment(F(j), A, 0);

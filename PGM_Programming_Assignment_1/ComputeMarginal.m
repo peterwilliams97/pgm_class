@@ -11,7 +11,6 @@
 %     Variables are in the first column and values are in the second column.
 %     If there is no evidence, pass in the empty matrix [] for E.
 
-
 function M = ComputeMarginal(V, F, E)
 
     % Check for empty factor list
@@ -28,6 +27,23 @@ function M = ComputeMarginal(V, F, E)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     M = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
+    
+    J = ComputeJointDistribution(F);
+    O = ObserveEvidence(J, E);
+    
+    [M.var Oi Vi] = intersect(O.var, V);
+    [dummy, mapM] = ismember(M.var, O.var);
+    M.card = O.card(Oi);
+    M.val = zeros(1,prod(M.card));
 
+    for k = 1:length(O.val),
+        AO = IndexToAssignment(k, O.card);
+        AM = AO(mapM);
+        idx = AssignmentToIndex(AM, M.card);
+        M.val(idx) = M.val(idx) + O.val(k);
+    end;    
+    total = sum(M.val);
+    M.val = M.val/total;
+   
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
